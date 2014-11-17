@@ -2,8 +2,9 @@ Name:       taglib
 Summary:    Audio Meta-Data Library
 Version:    1.9.1
 Release:    1
+Group:      System/Libraries
 
-License:    LGPLv2 or MPLv1.1
+License:    LGPL-2.0+ or MPL-1.1
 URL:        http://taglib.github.com/
 Source0:    %{name}-%{version}.tar.gz
 
@@ -29,12 +30,13 @@ This is API documentation generated from the TagLib source code.
 
 %package devel
 Summary: Development files for %{name} 
+Group:   Development/Libraries
 Requires: %{name} = %{version}-%{release}
 %if ! %{with doc}
 Obsoletes: %{name}-doc
 %endif
 %description devel
-Files needed when building software with %{name}.
+Files needed when building software with taglib.
 
 
 %prep
@@ -69,8 +71,6 @@ export PKG_CONFIG_PATH=%{buildroot}%{_datadir}/pkgconfig:%{buildroot}%{_libdir}/
 test "$(pkg-config --modversion taglib)" = "%{version}"
 test "$(pkg-config --modversion taglib_c)" = "%{version}"
 %if %{with tests}
-#ln -s ../../tests/data %{_target_platform}/tests/
-#LD_LIBRARY_PATH=%{buildroot}%{_libdir}:$LD_LIBRARY_PATH \
 make check -C %{_target_platform}
 %endif
 
